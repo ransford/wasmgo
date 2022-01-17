@@ -4,17 +4,25 @@
 		<meta charset="utf-8">
 		<script src="wasm_exec.js"></script>
 		<script>
+		function setText(text) {
+			document.getElementById("wasmgo").innerText = text;
+		}
 		if (WebAssembly && WebAssembly.instantiateStreaming) {
 			const go = new Go();
-			WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+			WebAssembly.instantiateStreaming(
+				fetch("main.wasm"),
+				go.importObject,
+			).then(
+				(result) => {
 					go.run(result.instance);
-					});
+				}
+			);
 		} else {
 			console.log("WebAssembly is not supported in your browser")
 		}
 		</script>
 	</head>
 	<body>
-		<main id="wasm"></main>
+		<main id="wasmgo"></main>
 	</body>
 </html>

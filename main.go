@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"syscall/js"
+	"time"
+)
 
 func main() {
-	fmt.Println("hi from go")
+	t := fmt.Sprintf("current time: %s", time.Now().String())
+	js.Global().Call("setText", t)
 }
